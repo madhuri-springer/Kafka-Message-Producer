@@ -23,7 +23,7 @@ class KafkaMessageProducer @Inject()(configuration: Configuration)(implicit syst
   private val logger = Logger(this.getClass)
   private val producerSettings: ProducerSettings[String, JsValue] = ProducerSettings(system, None, Some(JsValueSerializer))
   private val kafkaProducer: KafkaProducer[String, JsValue] = ProducerSettings.createKafkaProducer(producerSettings)
-  private val topic = configuration.get[String]("kafka.topic.names.in.customer_input_request")
+  private val topic = configuration.get[String]("kafka.topic.names.out.message")
 
   def send(payload: JsValue, key: String): Future[Done] = {
     logger.info(s"***** Sending Message Payload to topic $topic, server: ${configuration.get[String]("kafka.server")}")
