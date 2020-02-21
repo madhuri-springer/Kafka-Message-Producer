@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import messages.TaskCompleted
+import messages.{CreateProcessInstance, ParseCustomerEmail, TaskCompleted}
 import play.api.Configuration
 import play.api.mvc._
 import producers.KafkaMessageProducer
@@ -12,12 +12,18 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
 
   def emailRequest = Action.async { implicit request =>
 
-    // Command to initiate Parse Customer Email
-    // kafkaMessageProducer.send(CustomerInputRequest.topic_parseCustomerEmail, CustomerInputRequest.parse_customer_email, CustomerInputRequest.key)
+//    val obj = CreateProcessInstance
+//    val obj = ParseCustomerEmail
 
-    // Command to sent task completed message when email parsing is done
-    // Customer Action - Delete
-    kafkaMessageProducer.send(TaskCompleted.topic, TaskCompleted.email_parsed_delete, TaskCompleted.key)
+//    kafkaMessageProducer.send(obj.topic, obj.message, obj.key)
+
+
+    // For Task Completed ==>
+    val tc = TaskCompleted
+    val action = TaskCompleted.email_parsed_delete
+//    val action = TaskCompleted.calculated_delete_terms
+
+    kafkaMessageProducer.send(tc.topic, action, tc.key)
 
     Future.successful(Ok("Successful"))
   }
