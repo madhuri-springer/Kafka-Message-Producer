@@ -17,7 +17,8 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
 
     // Command to sent task completed message when email parsing is done
     // Customer Action - Delete
-    kafkaMessageProducer.send(TaskCompleted.topic, TaskCompleted.email_parsed_delete, TaskCompleted.key)
+//    kafkaMessageProducer.send(TaskCompleted.topic, TaskCompleted.email_parsed_delete, TaskCompleted.key)
+    kafkaMessageProducer.send(TaskCompleted.topic, TaskCompleted.calculated_delete_terms, TaskCompleted.key)
 
     Future.successful(Ok("Successful"))
   }
