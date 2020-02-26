@@ -17,9 +17,9 @@ trait KafkaMsgCommon {
 
   def timestamp = Instant.now.toString
 
-  def processId:String = ""
+  def processId:String
 
-  def taskId: String = ""
+  def taskId: String
 
   def key = processId
 
@@ -28,7 +28,7 @@ trait KafkaMsgCommon {
       "name" -> topic,
       "id" -> id,
       "root_id" -> rootId,
-      "parent_id" -> "64ad1440-a8cc-4f05-8fc3-feac718Feb01",
+      "parent_id" -> parent_id,
       "type" -> msgType,
       "timestamp" -> timestamp,
       "data" -> Json.obj(

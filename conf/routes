@@ -2,5 +2,4 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
-GET         /sendMessage                  controllers.KafkaMessageController.emailRequest
-      
+GET         /sendMessage/:action                 controllers.KafkaMessageController.sendMessage(action:String, processId:String?="", taskId:String?="")
