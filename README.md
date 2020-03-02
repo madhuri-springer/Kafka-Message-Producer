@@ -12,7 +12,10 @@ Run these commands from project folder (Kafka-Message-Producer)
 
 | Message | Command |
 | ------- | ------- |
-| Create Process Instance | make command/create_process_instance |
-| Parse Customer Email | make command/parse_customer_email |
-| Task Completed (email_parsed) | make task_completed/email_parsed pid=[processid] tid=[taskid]|
+| Create Process Instance : Add | make command/create_process_instance_add  |
+| Create Process Instance : Delete | make command/create_process_instance_delete  |
+| Parse Customer Email | make command/parse_customer_email pid=[processid] tid=[taskid]|
+| Task Completed (email_parsed : Add) | make task_completed/email_parsed_add pid=[processid] tid=[taskid]|
+| Task Completed (email_parsed : Delete) | make task_completed/email_parsed_delete pid=[processid] tid=[taskid]|
 | Task Completed (calculated_delete_terms) | make task_completed/calculated_delete_terms pid=[processid] tid=[taskid]|
+| Task Completed (terms_suggested) | make task_completed/terms_suggested pid=[processid] tid=[taskid]|
