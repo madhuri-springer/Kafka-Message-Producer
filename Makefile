@@ -1,5 +1,8 @@
-command/create_process_instance:
-	curl "localhost:9000/sendMessage/create_process_instance"
+command/create_process_instance_add:
+	curl "localhost:9000/sendMessage/create_process_instance_add"
+
+command/create_process_instance_delete:
+	curl "localhost:9000/sendMessage/create_process_instance_delete"
 
 command/parse_customer_email:
 	curl "localhost:9000/sendMessage/parse_customer_email"

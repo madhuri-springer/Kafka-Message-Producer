@@ -13,7 +13,12 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
   def sendMessage(action: String, processId:String, taskId:String) = Action.async { implicit request =>
 
     action match {
-      case "create_process_instance" => kafkaMessageProducer.send(CreateProcessInstance.topic, CreateProcessInstance.message, CreateProcessInstance.key)
+      case "create_process_instance_add" => {
+        kafkaMessageProducer.send(CreateProcessInstance.topic, CreateProcessInstance.message("Add"), CreateProcessInstance.key)
+      }
+      case "create_process_instance_delete" => {
+        kafkaMessageProducer.send(CreateProcessInstance.topic, CreateProcessInstance.message("Delete"), CreateProcessInstance.key)
+      }
       case "parse_customer_email" => {
         validate(processId, taskId)
         val parseCustomerEmail = ParseCustomerEmail(processId, taskId)
