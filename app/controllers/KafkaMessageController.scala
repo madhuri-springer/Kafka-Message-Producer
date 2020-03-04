@@ -40,6 +40,11 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
         val taskCompleted = TaskCompleted(processId, taskId)
         kafkaMessageProducer.send(taskCompleted.topic, taskCompleted.terms_suggested, taskCompleted.key)
       }
+      case "terms_mapped" => {
+        validate(processId, taskId)
+        val taskCompleted = TaskCompleted(processId, taskId)
+        kafkaMessageProducer.send(taskCompleted.topic, taskCompleted.terms_mapped, taskCompleted.key)
+      }
     }
 
     Future.successful(Ok("Successful"))

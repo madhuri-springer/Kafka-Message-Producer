@@ -18,3 +18,6 @@ task_completed/calculated_delete_terms:
 
 task_completed/terms_suggested:
 	curl "localhost:9000/sendMessage/terms_suggested?processId=$(pid)&taskId=$(tid)"
+
+task_completed/terms_mapped:
+	curl "localhost:9000/sendMessage/terms_mapped?processId=$(pid)&taskId=$(tid)"

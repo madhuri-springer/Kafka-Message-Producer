@@ -13,7 +13,7 @@ case class TaskCompleted (processId: String, taskId: String) extends KafkaMsgCom
         "customerAction" -> action,
         "customerInput" -> customerInput
       ),
-      Option("email_parsed")
+      Option("adis.cip.email_parsed")
     )
   }
 
@@ -23,7 +23,7 @@ case class TaskCompleted (processId: String, taskId: String) extends KafkaMsgCom
       Json.obj(
         "customerInput" -> customerInput
       ),
-      Option("calculated_delete_terms")
+      Option("adis.cip.calculated_delete_terms")
     )
   }
 
@@ -33,7 +33,17 @@ case class TaskCompleted (processId: String, taskId: String) extends KafkaMsgCom
       Json.obj(
         "customerInput" -> customerInput
       ),
-      Option("terms-suggested")
+      Option("adis.cip.terms-suggested")
+    )
+  }
+
+  def terms_mapped = {
+    val customerInput = """{"_class":"CustomerInput","_ident":3,"creationDate":"2020-03-03T06:10:38.527Z","customerDrugData":[{"_class":"CustomerDrugData","_ident":4,"customerDrugTerm":"pindolol","mappedDrugs":[{"vocabularyUris":["http://km.springernature.com/adis/Drug"],"normalizedLabel":"Pindolol","prefLabel":"pindolol","thesIds":["96296"],"_class":"Vocabulary","_id":"http://km.springernature.com/adis/96296","uri":"http://km.springernature.com/adis/96296","altLabels":["LB-46","Prindolol","Prinodolol"]},{"vocabularyUris":["http://km.springernature.com/adis/Drug"],"normalizedLabel":"Bopindolol","prefLabel":"bopindolol","thesIds":["20786"],"_class":"Vocabulary","_id":"http://km.springernature.com/adis/20786","uri":"http://km.springernature.com/adis/20786","altLabels":["Bopindolol-malonate","LT-31200"]}],"exactSuggestedDrugs":[],"fuzzySuggestedDrugs":[]}],"action":"Add","subscription":{"_class":"Subscription","_ident":5,"id":"101","name":"Novartis-MAH ICSR-EA","type":["ValidICSR"],"content":"EarlyAlert","odysseyDeliveryCode":"news.novartis_ea","odysseyCustomerDrugCode":"nl.novartis","serviceStartDate":"2019-10-30T00:00:00Z","backboundaryDate":"2018-01-01T00:00:00Z","articleTypes":[],"drugData":[],"additionalFilteringRules":[],"customerCriteria":[],"ruleName":"novartis_mah","subscriptionIdsForResend":[],"exclusionSubscriptionIds":[],"databaseName":[],"journalName":[],"ageGroup":[],"deliveryMode":"Batch","deliveryTimePattern":["0 52 10 ? * MON,TUE,WED,THU,FRI *"],"manifests":[{"_class":"Manifest","_ident":6,"id":"123","startDatePattern":"0 0 0 ? * * *","endDatePattern":"0 59 23 ? * * *","template":"http://www.springernature.com/vocabulary/Template?preProcess=PassThru&fork=PassThru&transform=NovartisEaIcsrDailyManifest&body=NovartisEaDailyManifest","destination":"mailto:shelendra.kumar@springernature.com?cc=nayan.mathur@springernature.com","deliveryTimePattern":"0 50 10 ? * * *","isSigModification":false},{"_class":"Manifest","_ident":7,"id":"456","startDatePattern":"0 0 0 1 * ? *","endDatePattern":"0 59 23 L * ? *","template":"http://www.springernature.com/vocabulary/Template?preProcess=PassThru&fork=PassThru&transform=NovartisEaIcsrMonthlyManifest&body=NovartisEaMonthlyManifest","destination":"mailto:shelendra.kumar@springernature.com?cc=nayan.mathur@springernature.com","deliveryTimePattern":"0 21 10 ? * * *","isSigModification":false}],"allowedPublishersForAbstract":["SpringerNature"],"toEmailName":"novartis","productBundle":"core_icsr_e2b","active":true,"reConciliationEnabled":false,"deliverWorldWideIdDuplicate":false,"isSigModification":false},"isSigModification":false}"""
+    generateMessage(
+      Json.obj(
+        "customerInput" -> customerInput
+      ),
+      Option("adis.cip.terms_mapped")
     )
   }
 }
