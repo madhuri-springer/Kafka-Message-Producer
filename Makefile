@@ -5,7 +5,7 @@ command/create_process_instance_delete:
 	curl "localhost:9000/sendMessage/create_process_instance_delete"
 
 command/parse_customer_email:
-	curl "localhost:9000/sendMessage/parse_customer_email"
+	curl "localhost:9000/sendMessage/parse_customer_email?processId=$(pid)&taskId=$(tid)"
 
 task_completed/email_parsed_delete:
 	curl "localhost:9000/sendMessage/email_parsed_delete?processId=$(pid)&taskId=$(tid)"
