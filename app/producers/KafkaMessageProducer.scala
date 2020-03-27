@@ -26,6 +26,7 @@ class KafkaMessageProducer @Inject()(configuration: Configuration)(implicit syst
 
   def send(topic:String, payload: JsValue, key: String): Future[Done] = {
     logger.info(s"***** Sending Message Payload to topic $topic, server: ${configuration.get[String]("kafka.server")}")
+    println(s"***** Sending Message Payload to topic $topic, server: ${configuration.get[String]("kafka.server")}")
     val record = new ProducerRecord[String, JsValue](topic, key, payload)
     Source.single(record).runWith(Producer.plainSink(producerSettings.withProducer(kafkaProducer)))
   }
