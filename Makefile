@@ -21,3 +21,6 @@ task_completed/terms_suggested:
 
 task_completed/terms_mapped:
 	curl "localhost:9000/sendMessage/terms_mapped?processId=$(pid)&taskId=$(tid)"
+
+command/feeds_update_subscription:
+	curl "localhost:9000/sendMessage/feeds_update_subscription"

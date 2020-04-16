@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject._
-import messages.{CreateProcessInstance, ParseCustomerEmail, TaskCompleted}
+import messages.{CreateProcessInstance, FeedsUpdateSubscription, ParseCustomerEmail, TaskCompleted}
 import play.api.Configuration
 import play.api.mvc._
 import producers.KafkaMessageProducer
@@ -18,6 +18,9 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
       }
       case "create_process_instance_delete" => {
         kafkaMessageProducer.send(CreateProcessInstance.topic, CreateProcessInstance.message("Delete"), CreateProcessInstance.key)
+      }
+      case "feeds_update_subscription" => {
+        kafkaMessageProducer.send(FeedsUpdateSubscription.topic, FeedsUpdateSubscription.message, FeedsUpdateSubscription.key)
       }
       case "parse_customer_email" => {
         validate(processId, taskId)
