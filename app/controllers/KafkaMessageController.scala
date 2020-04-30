@@ -27,6 +27,11 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
         val parseCustomerEmail = ParseCustomerEmail(processId, taskId)
         kafkaMessageProducer.send(parseCustomerEmail.topic, parseCustomerEmail.message, parseCustomerEmail.key)
       }
+      case "email_parsed_failure" => {
+        validate(processId, taskId)
+        val taskCompleted = TaskCompleted(processId, taskId)
+        kafkaMessageProducer.send(taskCompleted.topic, taskCompleted.email_parsed_failed, taskCompleted.key)
+      }
       case "email_parsed_delete" => {
         sendEmailParsedMessage("Delete", processId, taskId)
       }
@@ -56,7 +61,7 @@ class KafkaMessageController @Inject()(cc: ControllerComponents, kafkaMessagePro
   private def sendEmailParsedMessage(action: String, processId: String, taskId: String) = {
     validate(processId, taskId)
     val taskCompleted = TaskCompleted(processId, taskId)
-    kafkaMessageProducer.send(taskCompleted.topic, taskCompleted.email_parsed(action), taskCompleted.key)
+    kafkaMessageProducer.send(taskCompleted.topic, taskCompleted.email_parsed_success(action), taskCompleted.key)
   }
 
   private def validate(processId: String, taskId: String) = {

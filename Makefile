@@ -13,6 +13,9 @@ task_completed/email_parsed_delete:
 task_completed/email_parsed_add:
 	curl "localhost:9000/sendMessage/email_parsed_add?processId=$(pid)&taskId=$(tid)"
 
+task_completed/email_parsed_failure:
+	curl "localhost:9000/sendMessage/email_parsed_failure?processId=$(pid)&taskId=$(tid)"
+
 task_completed/calculated_delete_terms:
 	curl "localhost:9000/sendMessage/calculated_delete_terms?processId=$(pid)&taskId=$(tid)"
 
